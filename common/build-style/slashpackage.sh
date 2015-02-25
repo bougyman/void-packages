@@ -25,6 +25,7 @@
 #   distfiles="http://cr.yp.to/daemontools/${pkgname}-${version}.tar.gz"
 
 do_build() {
+  sed -i -e "s/^gcc/$CC/" src/conf-cc
 	package/compile
 }
 
