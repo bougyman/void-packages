@@ -1,0 +1,38 @@
+# Template file for 'wmii'
+pkgname=wmii
+version=3.9.2
+revision=1
+wrksrc=${pkgname}+ixp-${version}
+#create_wrksrc=yes
+#only_for_archs="i686 x86_64"
+#build_style=gnu-configure
+build_style=""
+#configure_args=""
+#make_build_args=""
+#make_install_args=""
+#conf_files=""
+#make_dirs="/var/log/dir 0755 root root"
+hostmakedepends=""
+makedepends="pkg-config libXext-devel libXrandr-devel libXft-devel libXrender-devel libX11-devel libXinerama-devel"
+depends="dmenu"
+LDFLAGS="-lXext -lXft -lXrandr -lXrender -lX11 -lXinerama"
+short_desc="A lightweight, dynamic window manager for X11"
+maintainer="Zach L. <koni@archlinux.us>"
+license="GPL-3"
+homepage="https://code.google.com/p/wmii/"
+distfiles='https://wmii.googlecode.com/files/wmii+ixp-3.9.2.tbz'
+checksum=0466f1a5c534b0ee9fdace2c7a2d251845b7ec0ae80bdb8e68ae6584ebeebf2b
+
+do_build(){
+	cd ${wrksrc}
+	make clean
+	export CFLAGS="-I/usr/include/X11 -I/usr/include/X11/extensions -I/usr/include -I/usr/local/include -I/usr/include/freetype2"
+	export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/lib/"
+	sed "4s#.*#PREFIX = /usr#" ${wrksrc}/config.mk
+	make PREFIX=/usr || exit
+}
+
+do_install(){
+	cd ${wrksrc}
+	make PREFIX=/usr install || exit
+}
