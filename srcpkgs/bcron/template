@@ -1,0 +1,19 @@
+# Template file for 'bcron'
+pkgname=bcron
+version=0.10
+revision=1
+only_for_archs="i686 x86_64"
+build_style=gnu-makefile
+short_desc="UNIX-domain socket client-server command-line tools"
+maintainer="bougyman <tj@rubyists.com>"
+license="GPL-2"
+homepage="http://untroubled.org/bcron/bcron.html"
+distfiles="http://untroubled.org/bcron/bcron-0.10.tar.gz"
+checksum=
+
+do_install() {
+	vbin bcron-sched
+	vbin bcron-exec
+	vbin bcron-spool
+	vbin bcron-update
+}
