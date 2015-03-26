@@ -24,5 +24,5 @@ do_build() {
 }
 
 do_install() {
-	vinstall ${wrksrc}/modules/xdebug.so 644 usr/lib/php/modules
+	vinstall ${wrksrc}/modules/xdebug.so 755 usr/lib/php/modules
 }
