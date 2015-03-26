@@ -1,13 +1,12 @@
 # Template build file for 'xdebug'
 pkgname=xdebug
 version=2.3.1
-revision=0
+revision=1
 short_desc="Debugger and Profiler Tool for PHP"
 license="Xdebug"
 homepage="http://xdebug.org/"
 hostmakedepends="autoconf"
 makedepends="php-devel"
-conf_files="/etc/php/php.ini"
 distfiles="http://xdebug.org/files/xdebug-${version}.tgz"
 checksum=b50365896089c76d6d64924b66428cc5ef6b4802371e3d422581b3c34d3ca64c
 
