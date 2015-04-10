@@ -1,0 +1,27 @@
+# Template file for 'cl-asdf'
+pkgname=cl-asdf
+version=3.1.4
+revision=1
+wrksrc="${pkgname}-${version}"
+create_wrksrc=yes
+only_for_archs="i686 x86_64"
+build_style=gnu-makefile
+hostmakedepends="sbcl texinfo"
+short_desc="Another System Definition Facility"
+maintainer="bougyman <bougyman@voidlinux.eu>"
+license="GPL-3"
+homepage="https://common-lisp.net/project/asdf/"
+distfiles="https://common-lisp.net/project/asdf/archives/asdf-${version}.tar.gz"
+checksum=bc8bfaf36335e5f01fd08159c1ded5a96088fbea002b466bdf95c129c413cc43
+
+do_build() {
+	make
+	cd doc
+	make
+	mv asdf.info asdf-${version}.info
+	cd ..
+	cat debian/copyright | sed -e :a -e '$q;N;25,$D;ba' > doc/copyright
+}
+do_install() {
+	vcopy * $DESTDIR
+}
