@@ -1,0 +1,19 @@
+# INSTALL
+case "$ACTION" in
+post)
+	if [ "$UPDATE" != "yes" ]; then
+		# actions to execute if package is being installed.
+		for dir in /var/spool/icinga2/tmp /var/spool/icinga2/perfdata \
+			/var/log/icinga2 /var/log/icinga2/crash \
+			/var/log/icinga2/compat/archives \
+			/var/lib/icinga2/api/zones \
+			/var/lib/icinga2/api/repository \
+			/var/lib/icinga2/api/log /var/cache/icinga2 \
+			/etc/icinga2/pki \
+		do
+			install -d -m0750 $dir
+			chown -R icinga:icingacmd $dir
+		done
+	fi
+	;;
+esac

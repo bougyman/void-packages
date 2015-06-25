@@ -1,0 +1,8 @@
+case ${ACTION} in
+purge)
+	for dir in /var/spool/icinga2 /var/lib/icinga2 /var/cache/icinga2 \
+			/etc/icinga2 /var/log/icinga2; do
+		rm -rf $dir
+	done
+	;;
+esac

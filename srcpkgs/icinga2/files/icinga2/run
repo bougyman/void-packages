@@ -1,0 +1,4 @@
+#!/bin/sh
+[ -d /run/icinga2/cmd ] || install -d -m0750 /run/icinga2/cmd 
+chown -R icinga:icingacmd /run/icinga2
+exec chpst -u icinga icinga2 daemon 2>&1

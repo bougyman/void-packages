@@ -1,0 +1,34 @@
+# Template file for 'icinga2'
+pkgname=icinga2
+version=2.3.5
+revision=1
+only_for_archs="x86_64"
+build_style=cmake
+configure_args="-DICINGA2_RUNDIR=/run -DCMAKE_INSTALL_SYSCONFDIR=/etc -DCMAKE_INSTALL_LOCALSTATEDIR=/var"
+conf_files="etc/icinga2/init.conf etc/icinga2/constants.conf etc/icinga2/icinga2.conf
+	etc/icinga2/zones.conf etc/icinga2/conf.d/commands.conf
+	etc/icinga2/conf.d/downtimes.conf etc/icinga2/conf.d/groups.conf
+	etc/icinga2/conf.d/hosts.conf etc/icinga2/conf.d/services.conf
+	etc/icinga2/conf.d/notifications.conf etc/icinga2/conf.d/satellite.conf
+	etc/icinga2/conf.d/templates.conf etc/icinga2/conf.d/timeperiods.conf
+	etc/icinga2/conf.d/users.conf etc/icinga2/scripts/mail-host-notification.sh
+	etc/icinga2/scripts/mail-service-notification.sh"
+hostmakedepends="cmake bison flex"
+makedepends="libmysqlclient-devel postgresql-libs-devel libressl-devel boost-devel yajl-devel"
+short_desc="Scalable and extensible monitoring system"
+maintainer="bougyman <bougyman@voidlinux.eu>"
+license="GPL-2"
+homepage="http://www.icinga.org"
+distfiles="https://github.com/Icinga/icinga2/archive/v${version}.tar.gz"
+checksum=712d13e997fc6fbf02f8c2046851b1fda1291305f0d3d6792cbebf5fb1558225
+
+system_accounts="icinga"
+system_groups="icingacmd"
+icinga_groups="icingacmd"
+
+post_install() {
+	vdoc README.md
+	vlicense COPYING
+	vcopy "doc/*" usr/share/doc/icinga2/
+	vsv icinga2
+}
